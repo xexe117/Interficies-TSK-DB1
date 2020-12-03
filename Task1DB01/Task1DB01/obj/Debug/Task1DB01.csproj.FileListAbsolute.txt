@@ -1,0 +1,13 @@
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\bin\Debug\Task1DB01.exe.config
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\bin\Debug\Task1DB01.exe
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\bin\Debug\Task1DB01.pdb
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\bin\Debug\Dapper.dll
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\bin\Debug\Dapper.xml
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csprojAssemblyReference.cache
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.Form1.resources
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.Properties.Resources.resources
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.GenerateResource.cache
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.CoreCompileInputs.cache
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.CopyComplete
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.exe
+C:\Users\Alumne\Desktop\Interficies\Task1DB01\Task1DB01\obj\Debug\Task1DB01.pdb
