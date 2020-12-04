@@ -23,9 +23,13 @@ namespace Task1DB01
 
         }
 
- 
-
-        public int idFullInfo = 0;
+        public void lectura(List<ProductModel> products)
+        {
+            foreach (ProductModel product in products)
+            {
+                listBoxProducts.Items.Add(product.FullInfo);
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,12 +37,9 @@ namespace Task1DB01
 
             List<ProductModel> products = new List<ProductModel>();
 
-            products = db.GetShowAll();
+            products = db.GetShowAll(lenguageComboBox.Text);
 
-            foreach (ProductModel product in products)
-            {
-                listBoxProducts.Items.Add(product.FullInfo);
-            }
+            lectura(products);
         }
 
         private void aviabelCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -47,26 +48,64 @@ namespace Task1DB01
 
             List<ProductModel> products = new List<ProductModel>();
 
-            if (aviabelCheckBox.Checked = true){
-                listBoxProducts.Items.Clear();
-
-                products = db.GetAviabel();
-
-                foreach (ProductModel product in products)
-                {
-                    listBoxProducts.Items.Add(product.FullInfo);
-                }
-            } else if (aviabelCheckBox.Checked = false)
+            if (aviabelCheckBox.Checked == true)
             {
                 listBoxProducts.Items.Clear();
 
-                products = db.GetShowAll();
+                products = db.GetAviabel(lenguageComboBox.Text);
 
-                foreach (ProductModel product in products)
-                {
-                    listBoxProducts.Items.Add(product.FullInfo);
-                }
+                lectura(products);
+            }
+            else if (aviabelCheckBox.Checked == false)
+            {
+                listBoxProducts.Items.Clear();
+
+                products = db.GetShowAll(lenguageComboBox.Text);
+
+                lectura(products);
             } 
+        }
+
+
+        private void lenguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataAcces db = new DataAcces();
+
+            List<ProductModel> products = new List<ProductModel>();
+
+            if (aviabelCheckBox.Checked == true)
+            {
+                listBoxProducts.Items.Clear();
+
+                products = db.GetAviabel(lenguageComboBox.Text);
+
+                lectura(products);
+
+            }
+            else if (aviabelCheckBox.Checked == false)
+            {
+                listBoxProducts.Items.Clear();
+
+                products = db.GetShowAll(lenguageComboBox.Text);
+
+                lectura(products);
+            }
+        }
+
+        private void numFilasComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int currentpg = 0;
+            int cantidad = 10;
+
+            DataAcces db = new DataAcces();
+
+            List<ProductModel> products = new List<ProductModel>();
+
+            listBoxProducts.Items.Clear();
+
+            products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, cantidad);
+
+            lectura(products);
         }
     }
 }
