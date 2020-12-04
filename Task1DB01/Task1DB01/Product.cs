@@ -9,7 +9,7 @@ namespace Task1DB01
     public class ProductModel
     {
         public string Name { get; set; }
-        public string ProductName { get; set; }
+        public string ProductNumber { get; set; }
         public int MakeFlag { get; set; }
         public int FinishedGoodsFlag { get; set; }
         public string Color { get; set; }
@@ -17,7 +17,7 @@ namespace Task1DB01
         public int ReorderPoint { get; set; }
         public int StandardCost { get; set; }
         public int ListPrice { get; set; }
-        public int Size { get; set; }
+        public string Size { get; set; }
         public string SizeUnitMeasureCode { get; set; }
         public string WeightUnitMeasureCode { get; set; }
         public int Weight { get; set; }
@@ -37,11 +37,11 @@ namespace Task1DB01
         {
             get
             {
-                return $"{ Name } { ProductName } { MakeFlag } { FinishedGoodsFlag } " +
-                    $"{ Color } { SafetyStockLevel } { ReorderPoint } { StandardCost } { ListPrice } " +
-                    $"{ Size } { SizeUnitMeasureCode } { WeightUnitMeasureCode } { Weight } { DaysToManufacture } " +
-                    $"{ ProductLine } { Class } { Style } { ProductSubcategoryID } { ProductModelID } { SellStartDate } " +
-                    $"{ SellEndDate } { DiscontinuedDate } { rowguid } { ModifiedDate } ";
+                return $"{ Name }  ||  { ProductNumber }  ||  { MakeFlag }  ||  { FinishedGoodsFlag }  ||  " +
+                    $"{ Color }  ||  { SafetyStockLevel }  ||  { ReorderPoint }  ||  { StandardCost }  ||  { ListPrice }  ||  " +
+                    $"{ Size }  ||  { SizeUnitMeasureCode }  ||  { WeightUnitMeasureCode }  ||  { Weight }  ||  { DaysToManufacture }  ||  " +
+                    $"{ ProductLine }  ||  { Class }  ||  { Style }  ||  { ProductSubcategoryID }  ||  { ProductModelID }  ||  { SellStartDate }  ||  " +
+                    $"{ SellEndDate }  ||  { DiscontinuedDate }  ||  { rowguid }  ||  { ModifiedDate } ";
             }
         }
     }
