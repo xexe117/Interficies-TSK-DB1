@@ -83,7 +83,6 @@
             this.aviabelCheckBox.Size = new System.Drawing.Size(15, 14);
             this.aviabelCheckBox.TabIndex = 6;
             this.aviabelCheckBox.UseVisualStyleBackColor = true;
-            this.aviabelCheckBox.CheckedChanged += new System.EventHandler(this.aviabelCheckBox_CheckedChanged);
             // 
             // label3
             // 

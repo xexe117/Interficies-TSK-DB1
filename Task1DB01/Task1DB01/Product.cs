@@ -20,8 +20,10 @@ namespace Task1DB01
         public string ProductSubcategoryID { get; set; }
         public string ProductMOdel { get; set; }
         public string Description { get; set; }
+        public string SellStartDate { get; set; }
+        public string SellEndDate { get; set; }
 
-        public string NamDes
+        public string PNamDes
         {
             get
             {
@@ -29,7 +31,15 @@ namespace Task1DB01
             }
         }
 
-        public string NamFiltro
+        public string PshowAll
+        {
+            get
+            {
+                return $"{ Name } {ProductMOdel}  ||  {Description} || { SellStartDate } || { SellEndDate }";
+            }
+        }
+
+        public string PNamFiltro
         {
             get
             {

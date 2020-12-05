@@ -22,23 +22,9 @@ namespace Task1DB01
         {
             foreach (ProductModel product in products)
             {
-                listBoxProducts.Items.Add(product.NamDes);
+                listBoxProducts.Items.Add(product.PNamDes);
             }
         }
-
-        private void serchProductButt_Click(object sender, EventArgs e)
-        {
-            listBoxProducts.Items.Clear();
-
-            DataAcces db = new DataAcces();
-
-            List<ProductModel> products = new List<ProductModel>();
-
-            products = db.producName(lenguageComboBox.Text, enterProduct.Text);
-
-            lectura(products);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             DataAcces db = new DataAcces();
@@ -50,29 +36,52 @@ namespace Task1DB01
             lectura(products);
         }
 
-        private void aviabelCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void serchProductButt_Click(object sender, EventArgs e)
         {
+            listBoxProducts.Items.Clear();
+
             DataAcces db = new DataAcces();
 
             List<ProductModel> products = new List<ProductModel>();
 
+            products = db.producName(lenguageComboBox.Text, enterProduct.Text, aviabelCheckBox.Checked);
+
             if (aviabelCheckBox.Checked == true)
             {
-                listBoxProducts.Items.Clear();
-
-                products = db.GetAviabel(lenguageComboBox.Text);
-
                 lectura(products);
-            }
-            else if (aviabelCheckBox.Checked == false)
+            } else if (aviabelCheckBox.Checked == false)
             {
-                listBoxProducts.Items.Clear();
-
-                products = db.GetShowAll(lenguageComboBox.Text);
-
-                lectura(products);
+                foreach (ProductModel product in products)
+                {
+                    listBoxProducts.Items.Add(product.PshowAll);
+                }
             }
+            
         }
+
+        //private void aviabelCheckBox_CheckedChanged(object sender, EventArgs e)
+        //{
+            //DataAcces db = new DataAcces();
+
+            //List<ProductModel> products = new List<ProductModel>();
+
+            //if (aviabelCheckBox.Checked == true)
+            //{
+            //    listBoxProducts.Items.Clear();
+
+            //    products = db.producName(lenguageComboBox.Text, enterProduct.Text, aviabelCheckBox.Checked);
+
+            //    lectura(products);
+            //}
+            //else if (aviabelCheckBox.Checked == false)
+            //{
+            //    listBoxProducts.Items.Clear();
+
+            //    products = db.producName(lenguageComboBox.Text, enterProduct.Text, aviabelCheckBox.Checked);
+
+            //    lectura(products);
+            //}
+        //}
 
 
         private void lenguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -186,7 +195,7 @@ namespace Task1DB01
 
             foreach (ProductModel product in products)
             {
-                listBoxProducts.Items.Add(product.NamFiltro);
+                listBoxProducts.Items.Add(product.PNamFiltro);
             }
         }
 

@@ -15,7 +15,8 @@ namespace Task1DB01
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
             {
-                var output = connection.Query<ProductModel>("SELECT Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+                var output = connection.Query<ProductModel>("SELECT " +
+                                    "Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
                                 "FROM " +
                                     "Production.Product " +
                                     "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
@@ -81,11 +82,15 @@ namespace Task1DB01
             }
         }
 
-        public List<ProductModel> producName(string leng, string prod)
+        public List<ProductModel> producName(string leng, string prod, Boolean check)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
             {
-                string sql = "SELECT  " +
+                string sql = "";
+
+                if (check == true)
+                {
+                     sql = "SELECT  " +
                                     $"Production.Product.Name, Production.ProductDescription.Description " +
                              "FROM " +
                                     "Production.Product " +
@@ -95,7 +100,22 @@ namespace Task1DB01
                                     "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
                                     "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID  " +
                              "WHERE " +
-                                    $"Production.Product.Name like '%{prod}%'  AND ProductModelProductDescriptionCulture.CultureID = '{ leng }'";
+                                    $"Production.Product.Name like '%{prod}%' AND ProductModelProductDescriptionCulture.CultureID = '{ leng }' AND Product.ProductModelID IS NOT NULL AND Product.SellEndDate IS NOT NULL";
+                } else 
+                {
+                    sql = "SELECT  " +
+                                    $"Production.Product.Name, Production.ProductDescription.Description,  Production.Product.SellStartDate, Production.Product.SellEndDate " +
+                             "FROM " +
+                                    "Production.Product " +
+                                    "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
+                                    "INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID  " +
+                                    "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+                                    "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+                                    "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID  " +
+                             "WHERE " +
+                                    $"Production.Product.Name like '%{prod}%' AND ProductModelProductDescriptionCulture.CultureID = '{ leng }' AND Product.ProductModelID IS NOT NULL";
+                }
+                
 
                 var output = connection.Query<ProductModel>(sql).ToList();
                 return output;
