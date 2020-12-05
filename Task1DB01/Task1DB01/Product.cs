@@ -54,5 +54,13 @@ namespace Task1DB01
                 return $"{ProductMOdel}  ||  {Description}";
             }
         }
+
+        public string NamFiltro
+        {
+            get
+            {
+                return $"{ProductMOdel}  ||  {Description}  || { Size }";
+            }
+        }
     }
 }

@@ -41,6 +41,8 @@
             this.numPgLabel = new System.Windows.Forms.Label();
             this.numFilasComboBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +57,7 @@
             // 
             this.enterProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.enterProduct.Location = new System.Drawing.Point(155, 12);
-            this.enterProduct.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.enterProduct.Margin = new System.Windows.Forms.Padding(2);
             this.enterProduct.Name = "enterProduct";
             this.enterProduct.Size = new System.Drawing.Size(173, 23);
             this.enterProduct.TabIndex = 3;
@@ -76,7 +78,7 @@
             // 
             this.aviabelCheckBox.AutoSize = true;
             this.aviabelCheckBox.Location = new System.Drawing.Point(476, 17);
-            this.aviabelCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.aviabelCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.aviabelCheckBox.Name = "aviabelCheckBox";
             this.aviabelCheckBox.Size = new System.Drawing.Size(15, 14);
             this.aviabelCheckBox.TabIndex = 6;
@@ -100,7 +102,7 @@
             this.listBoxProducts.Items.AddRange(new object[] {
             ""});
             this.listBoxProducts.Location = new System.Drawing.Point(9, 60);
-            this.listBoxProducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxProducts.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxProducts.Name = "listBoxProducts";
             this.listBoxProducts.Size = new System.Drawing.Size(1086, 277);
             this.listBoxProducts.TabIndex = 0;
@@ -132,29 +134,31 @@
             // 
             // backButt
             // 
-            this.backButt.Location = new System.Drawing.Point(103, 362);
+            this.backButt.Location = new System.Drawing.Point(113, 361);
             this.backButt.Margin = new System.Windows.Forms.Padding(2);
             this.backButt.Name = "backButt";
             this.backButt.Size = new System.Drawing.Size(42, 21);
             this.backButt.TabIndex = 12;
             this.backButt.Text = "<";
             this.backButt.UseVisualStyleBackColor = true;
+            this.backButt.Click += new System.EventHandler(this.backButt_Click);
             // 
             // nextButt
             // 
-            this.nextButt.Location = new System.Drawing.Point(145, 362);
+            this.nextButt.Location = new System.Drawing.Point(155, 361);
             this.nextButt.Margin = new System.Windows.Forms.Padding(2);
             this.nextButt.Name = "nextButt";
             this.nextButt.Size = new System.Drawing.Size(42, 21);
             this.nextButt.TabIndex = 13;
             this.nextButt.Text = ">";
             this.nextButt.UseVisualStyleBackColor = true;
+            this.nextButt.Click += new System.EventHandler(this.nextButt_Click);
             // 
             // numPgLabel
             // 
             this.numPgLabel.AutoSize = true;
             this.numPgLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numPgLabel.Location = new System.Drawing.Point(16, 362);
+            this.numPgLabel.Location = new System.Drawing.Point(11, 362);
             this.numPgLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.numPgLabel.Name = "numPgLabel";
             this.numPgLabel.Size = new System.Drawing.Size(83, 17);
@@ -179,18 +183,51 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(16, 387);
+            this.label5.Location = new System.Drawing.Point(11, 387);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 17);
             this.label5.TabIndex = 16;
             this.label5.Text = "Rows:";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(513, 15);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 17);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Filter:";
+            // 
+            // filterComboBox
+            // 
+            this.filterComboBox.FormattingEnabled = true;
+            this.filterComboBox.Items.AddRange(new object[] {
+            "Product.ProductID",
+            "Product.Size",
+            "ProductCategory.Name",
+            "Product.ProductSubcategoryID",
+            "Product.ProductLine",
+            "Product.Class",
+            "Product.Style",
+            "Product.ListPrice",
+            "Product.Color",
+            "Product.MakeFlag"});
+            this.filterComboBox.Location = new System.Drawing.Point(579, 15);
+            this.filterComboBox.Name = "filterComboBox";
+            this.filterComboBox.Size = new System.Drawing.Size(121, 21);
+            this.filterComboBox.TabIndex = 18;
+            this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 441);
+            this.Controls.Add(this.filterComboBox);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numFilasComboBox);
             this.Controls.Add(this.numPgLabel);
@@ -204,7 +241,7 @@
             this.Controls.Add(this.enterProduct);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxProducts);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -229,6 +266,8 @@
         private System.Windows.Forms.Label numPgLabel;
         private System.Windows.Forms.ComboBox numFilasComboBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox filterComboBox;
     }
 }
 

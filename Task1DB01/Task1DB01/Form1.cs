@@ -27,7 +27,7 @@ namespace Task1DB01
         {
             foreach (ProductModel product in products)
             {
-                listBoxProducts.Items.Add(product.FullInfo);
+                listBoxProducts.Items.Add(product.NamDes);
             }
         }
 
@@ -91,41 +91,118 @@ namespace Task1DB01
             }
         }
 
+        int currentpg = 0;
+
         private void numFilasComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            currentpg = 0;
 
-            //int totalPG = db.numerototalPG(lenguageComboBox.Text, currentpg, cantidad);
+            int numtotalPg = calculpg();
 
+            numPgLabel.Text = "Pag " + (currentpg + 1) + " of " + numtotalPg;
+
+            DataAcces db = new DataAcces();
+            List<ProductModel> products = new List<ProductModel>();
+
+            listBoxProducts.Items.Clear();
+            products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, numFilasComboBox.Text);
+
+            lectura(products);
+        }
+
+        private void nextButt_Click(object sender, EventArgs e)
+        {
+            int numtotalPg = calculpg();
+
+
+            DataAcces db = new DataAcces();
+            List<ProductModel> products = new List<ProductModel>();
+
+            if (currentpg >= numtotalPg)
+            {
+                currentpg = numtotalPg;
+                numPgLabel.Text = "Pag " + (currentpg) + " of " + numtotalPg;
+            }
+            else
+            {
+                ++currentpg;
+
+                numPgLabel.Text = "Pag " + (currentpg) + " of " + numtotalPg;
+            }
+
+            listBoxProducts.Items.Clear();
+
+            products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg - 1, numFilasComboBox.Text);
+
+            lectura(products);
+        }
+
+        private void backButt_Click(object sender, EventArgs e)
+        {
+            int numtotalPg = calculpg();
+            --currentpg;
+
+            DataAcces db = new DataAcces();
+            List<ProductModel> products = new List<ProductModel>();
+
+            if (currentpg <= 0)
+            {
+                listBoxProducts.Items.Clear();
+
+                currentpg = 0;
+                numPgLabel.Text = "Pag " + (currentpg) + " of " + numtotalPg;
+            }
+            else
+            {
+                --currentpg;
+                numPgLabel.Text = "Pag " + (currentpg) + " of " + numtotalPg;
+
+                listBoxProducts.Items.Clear();
+
+                products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, numFilasComboBox.Text);
+
+                lectura(products);
+            }
+
+
+        }
+
+        private void filterComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataAcces db = new DataAcces();
+
+            List<ProductModel> products = new List<ProductModel>();
+            listBoxProducts.Items.Clear();
+
+            products = db.Filtro(lenguageComboBox.Text, filterComboBox.Text);
+
+            foreach (ProductModel product in products)
+            {
+                listBoxProducts.Items.Add(product.NamFiltro);
+            }
+        }
+
+        public int calculpg()
+        {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
             {
-                int currentpg = 0;
-                string sql = "SELECT COUNT(*), Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+                string sql = "SELECT COUNT(*) " +
                                 "FROM " +
                                     "Production.Product " +
                                     "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
                                     "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
                                     "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
-                                $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ lenguageComboBox }' " +
-                                $"ORDER BY Production.ProductModel.Name OFFSET { currentpg } ROWS FETCH NEXT { numFilasComboBox.Text } ROWS ONLY";
+                                $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ lenguageComboBox.Text }' ";
 
 
                 DataAcces db = new DataAcces();
 
                 int totalNumeroDeProductes = connection.Query<int>(sql).FirstOrDefault();
 
+                int numtotalPg = totalNumeroDeProductes / int.Parse(numFilasComboBox.Text) + 1;
 
-                numPgLabel.Text = "Pag " + (currentpg + 1) + " of " + totalNumeroDeProductes / int.Parse(numFilasComboBox.Text) + 1;
-                List<ProductModel> products = new List<ProductModel>();
-
-                listBoxProducts.Items.Clear();
-
-                products = connection.Query<ProductModel>(sql).ToList();
-
-                foreach (ProductModel product in products)
-                {
-                    listBoxProducts.Items.Add(product.NamDes);
-                }
-            }        
+                return numtotalPg;
+            }
         }
     }
 }
