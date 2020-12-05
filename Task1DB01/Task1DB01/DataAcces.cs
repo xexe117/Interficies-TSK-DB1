@@ -80,5 +80,26 @@ namespace Task1DB01
                 return output;
             }
         }
+
+        public List<ProductModel> producName(string leng, string prod)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+            {
+                string sql = "SELECT  " +
+                                    $"Production.Product.Name, Production.ProductDescription.Description " +
+                             "FROM " +
+                                    "Production.Product " +
+                                    "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
+                                    "INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID  " +
+                                    "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+                                    "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+                                    "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID  " +
+                             "WHERE " +
+                                    $"Production.Product.Name like '%{prod}%'  AND ProductModelProductDescriptionCulture.CultureID = '{ leng }'";
+
+                var output = connection.Query<ProductModel>(sql).ToList();
+                return output;
+            }
+        }
     }
 }

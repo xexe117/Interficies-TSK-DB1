@@ -18,17 +18,25 @@ namespace Task1DB01
             InitializeComponent();
         }
 
-        private void enterProduct_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         public void lectura(List<ProductModel> products)
         {
             foreach (ProductModel product in products)
             {
                 listBoxProducts.Items.Add(product.NamDes);
             }
+        }
+
+        private void serchProductButt_Click(object sender, EventArgs e)
+        {
+            listBoxProducts.Items.Clear();
+
+            DataAcces db = new DataAcces();
+
+            List<ProductModel> products = new List<ProductModel>();
+
+            products = db.producName(lenguageComboBox.Text, enterProduct.Text);
+
+            lectura(products);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -204,5 +212,7 @@ namespace Task1DB01
                 return numtotalPg;
             }
         }
+
+        
     }
 }

@@ -43,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
+            this.serchProductButt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -61,7 +62,6 @@
             this.enterProduct.Name = "enterProduct";
             this.enterProduct.Size = new System.Drawing.Size(173, 23);
             this.enterProduct.TabIndex = 3;
-            this.enterProduct.TextChanged += new System.EventHandler(this.enterProduct_TextChanged);
             // 
             // label2
             // 
@@ -221,11 +221,22 @@
             this.filterComboBox.TabIndex = 18;
             this.filterComboBox.SelectedIndexChanged += new System.EventHandler(this.filterComboBox_SelectedIndexChanged);
             // 
+            // serchProductButt
+            // 
+            this.serchProductButt.Location = new System.Drawing.Point(266, 40);
+            this.serchProductButt.Name = "serchProductButt";
+            this.serchProductButt.Size = new System.Drawing.Size(62, 19);
+            this.serchProductButt.TabIndex = 19;
+            this.serchProductButt.Text = "Serch";
+            this.serchProductButt.UseVisualStyleBackColor = true;
+            this.serchProductButt.Click += new System.EventHandler(this.serchProductButt_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1155, 441);
+            this.Controls.Add(this.serchProductButt);
             this.Controls.Add(this.filterComboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -268,6 +279,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox filterComboBox;
+        private System.Windows.Forms.Button serchProductButt;
     }
 }
 

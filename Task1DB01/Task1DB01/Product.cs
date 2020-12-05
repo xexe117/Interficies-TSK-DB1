@@ -25,7 +25,7 @@ namespace Task1DB01
         {
             get
             {
-                return $"{ProductMOdel}  ||  {Description}";
+                return $"{ Name } {ProductMOdel}  ||  {Description}";
             }
         }
 
