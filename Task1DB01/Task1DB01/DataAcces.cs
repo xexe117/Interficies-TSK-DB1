@@ -54,6 +54,43 @@ namespace Task1DB01
 				return output;
 			}
 		}
+        
+        //public List<ProductModel> UpdateViewRowsPage(string leng, int inici, string cantidad)
+        //{
+
+        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+        //    {
+        //        string sql = "SELECT Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+        //                        "FROM " +
+        //                            "Production.Product " +
+        //                            "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+        //                            "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+        //                            "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
+        //                        $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ leng }' " +
+        //                        $"ORDER BY Production.ProductModel.Name OFFSET { inici } ROWS FETCH NEXT { cantidad } ROWS ONLY";
+        //        var output = connection.Query<ProductModel>(sql).ToList();
+                
+        //        return output;
+        //    }
+        //}
+
+        //public int numerototalPG(string leng, int inici, string cantidad)
+        //{
+        //    using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+        //    {
+        //        string sql = "SELECT Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+        //                        "FROM " +
+        //                            "Production.Product " +
+        //                            "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+        //                            "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+        //                            "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
+        //                        $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ leng }' " +
+        //                        $"ORDER BY Production.ProductModel.Name OFFSET { inici } ROWS FETCH NEXT { cantidad } ROWS ONLY";
+
+        //        int numPG = connection.Query<int>(sql).FirstOrDefault();
+        //        return numPG;
+        //    }
+        //}
 
         public List<ProductModel> UpdateViewRowsPage(string leng, int inici, int cantidad)
         {

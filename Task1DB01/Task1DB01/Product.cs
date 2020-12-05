@@ -32,6 +32,8 @@ namespace Task1DB01
         public string DiscontinuedDate { get; set; }
         public string rowguid { get; set; }
         public string ModifiedDate { get; set; }
+        public string ProductMOdel { get; set; }
+        public string Description { get; set; }
 
         public string FullInfo
         {
@@ -42,6 +44,14 @@ namespace Task1DB01
                     $"{ Size }  ||  { SizeUnitMeasureCode }  ||  { WeightUnitMeasureCode }  ||  { Weight }  ||  { DaysToManufacture }  ||  " +
                     $"{ ProductLine }  ||  { Class }  ||  { Style }  ||  { ProductSubcategoryID }  ||  { ProductModelID }  ||  { SellStartDate }  ||  " +
                     $"{ SellEndDate }  ||  { DiscontinuedDate }  ||  { rowguid }  ||  { ModifiedDate } ";
+            }
+        }
+
+        public string NamDes
+        {
+            get
+            {
+                return $"{ProductMOdel}  ||  {Description}";
             }
         }
     }

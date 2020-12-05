@@ -63,7 +63,7 @@ namespace Task1DB01
                 products = db.GetShowAll(lenguageComboBox.Text);
 
                 lectura(products);
-            } 
+            }
         }
 
 
@@ -80,7 +80,6 @@ namespace Task1DB01
                 products = db.GetAviabel(lenguageComboBox.Text);
 
                 lectura(products);
-
             }
             else if (aviabelCheckBox.Checked == false)
             {
@@ -94,18 +93,39 @@ namespace Task1DB01
 
         private void numFilasComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int currentpg = 0;
-            int cantidad = 10;
 
-            DataAcces db = new DataAcces();
+            //int totalPG = db.numerototalPG(lenguageComboBox.Text, currentpg, cantidad);
 
-            List<ProductModel> products = new List<ProductModel>();
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+            {
+                int currentpg = 0;
+                string sql = "SELECT COUNT(*), Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+                                "FROM " +
+                                    "Production.Product " +
+                                    "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+                                    "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+                                    "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
+                                $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ lenguageComboBox }' " +
+                                $"ORDER BY Production.ProductModel.Name OFFSET { currentpg } ROWS FETCH NEXT { numFilasComboBox.Text } ROWS ONLY";
 
-            listBoxProducts.Items.Clear();
 
-            products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, cantidad);
+                DataAcces db = new DataAcces();
 
-            lectura(products);
+                int totalNumeroDeProductes = connection.Query<int>(sql).FirstOrDefault();
+
+
+                numPgLabel.Text = "Pag " + (currentpg + 1) + " of " + totalNumeroDeProductes / int.Parse(numFilasComboBox.Text) + 1;
+                List<ProductModel> products = new List<ProductModel>();
+
+                listBoxProducts.Items.Clear();
+
+                products = connection.Query<ProductModel>(sql).ToList();
+
+                foreach (ProductModel product in products)
+                {
+                    listBoxProducts.Items.Add(product.NamDes);
+                }
+            }        
         }
     }
 }
