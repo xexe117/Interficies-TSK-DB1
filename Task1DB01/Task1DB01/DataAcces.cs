@@ -75,7 +75,7 @@ namespace Task1DB01
 
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
             {
-                string sql = "SELECT Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
+                string sql = "SELECT Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description, Production.Product.Name " +
                                 "FROM " +
                                     "Production.Product " +
                                     "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
@@ -118,7 +118,7 @@ namespace Task1DB01
                 if (check == true)
                 {
                      sql = "SELECT  " +
-                                    $"Production.Product.Name, Production.ProductDescription.Description " +
+                                    $"Production.Product.Name, Production.ProductDescription.Description, Production.Product.Name " +
                              "FROM " +
                                     "Production.Product " +
                                     "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
@@ -131,7 +131,7 @@ namespace Task1DB01
                 } else 
                 {
                     sql = "SELECT  " +
-                                    $"Production.Product.Name, Production.ProductDescription.Description,  Production.Product.SellStartDate, Production.Product.SellEndDate " +
+                                    $"Production.Product.Name, Production.ProductDescription.Description, Production.Product.Name, Production.Product.SellStartDate, Production.Product.SellEndDate " +
                              "FROM " +
                                     "Production.Product " +
                                     "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
@@ -144,6 +144,19 @@ namespace Task1DB01
                 }
                 
 
+                var output = connection.Query<ProductModel>(sql).ToList();
+                return output;
+            }
+
+        }
+
+        public List<ProductModel> updateProduct(string up, string name, string textup, string contingut)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+            {
+                string sql = $"UPDATE Production.{ up }" +
+                             $"Set { name } = '{ textup }" +
+                             $"WHERE { name } = '{ contingut }'";
                 var output = connection.Query<ProductModel>(sql).ToList();
                 return output;
             }

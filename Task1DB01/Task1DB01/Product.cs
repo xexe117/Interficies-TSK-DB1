@@ -41,7 +41,7 @@ namespace Task1DB01
         {
             get
             {
-                return $"{ProductMOdel}||  {Description}  ||{ Name }";
+                return $"{ Name }||  {ProductMOdel}||  {Description}";
             }
         }
 
@@ -49,7 +49,7 @@ namespace Task1DB01
         {
             get
             {
-                return $"{ Name } {ProductMOdel}  ||  {Description} || { SellStartDate } || { SellEndDate }";
+                return $"{ Name }||  {ProductMOdel}  ||  {Description} || { SellStartDate } || { SellEndDate }";
             }
         }
 
@@ -57,7 +57,7 @@ namespace Task1DB01
         {
             get
             {
-                return $"{ProductMOdel}  ||  {Description}  || { Size } { ProductID } { Name } { ProductSubcategoryID } { ProductLine } { Class } { Style } { ListPrice } { Color } { MakeFlag }";
+                return $"{ Name }||  {ProductMOdel}  ||  {Description}  || { Size } { ProductID } { Name } { ProductSubcategoryID } { ProductLine } { Class } { Style } { ListPrice } { Color } { MakeFlag }";
             }
         }
     }
