@@ -11,18 +11,45 @@ namespace Task1DB01
     public class DataAcces
     {
         // Aqui pots crear querys en forma de metodes (A vuelto, en FORMA DE CHAPA)
-        public List<ProductModel> GetShowAll(string leng)
+        public List<ProductModel> GetShowAll(string leng, string name)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
+            {
+                string sql = "SELECT  " +
+                                     "Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description, " +
+                                     "Production.Product.Name, Production.Product.ProductNumber, Production.Product.Color, Production.Product.ListPrice, Production.Product.Size, " +
+                                     "Production.Product.ProductLine, Production.Product.Class, Production.Product.Style, " +
+                                     "Production.ProductCategory.Name AS [Product Category], " +
+                                     "Production.ProductSubcategory.Name AS [Product Subcategory], Production.Product.StandardCost " +
+                              "FROM " +
+                                     "Production.Product " +
+                                     "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
+                                     "INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID " +
+                                     "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+                                     "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+                                     "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
+                              $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ leng }' AND Product.ProductModelID IS NOT NULL AND Product.Name LIKE '{ name }'";
+
+                var output = connection.Query<ProductModel>(sql).ToList();
+
+                return output;
+            }
+        }
+
+        public List<ProductModel> GetShow(string leng)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("AdventureWorks2016")))
             {
                 var output = connection.Query<ProductModel>("SELECT " +
-                                    "Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description " +
-                                "FROM " +
-                                    "Production.Product " +
-                                    "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
-                                    "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
-                                    "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
-                                $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ leng }' AND Product.ProductModelID IS NOT NULL").ToList();
+                                                                "Production.ProductModel.Name AS ProductMOdel, Production.ProductDescription.Description, Production.Product.Name " +
+                                                            "FROM " +
+                                                                "Production.Product " +
+                                                                "INNER JOIN Production.ProductSubcategory ON Production.Product.ProductSubcategoryID = Production.ProductSubcategory.ProductSubcategoryID " +
+                                                                "INNER JOIN Production.ProductCategory ON Production.ProductSubcategory.ProductCategoryID = Production.ProductCategory.ProductCategoryID " +
+                                                                "INNER JOIN Production.ProductModel ON Production.Product.ProductModelID = Production.ProductModel.ProductModelID " +
+                                                                "INNER JOIN Production.ProductModelProductDescriptionCulture ON Production.ProductModel.ProductModelID = Production.ProductModelProductDescriptionCulture.ProductModelID " +
+                                                                "INNER JOIN Production.ProductDescription ON Production.ProductModelProductDescriptionCulture.ProductDescriptionID = Production.ProductDescription.ProductDescriptionID " +
+                                                            $"WHERE ProductModelProductDescriptionCulture.CultureID = '{ leng }' AND Product.ProductModelID IS NOT NULL").ToList();
 
                 return output;
             }

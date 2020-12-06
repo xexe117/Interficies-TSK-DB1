@@ -11,29 +11,30 @@ using System.Windows.Forms;
 
 namespace Task1DB01
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        public void lectura(List<ProductModel> products)
+        public void Lectura(List<ProductModel> products)
         {
             foreach (ProductModel product in products)
             {
                 listBoxProducts.Items.Add(product.PNamDes);
             }
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
             DataAcces db = new DataAcces();
 
             List<ProductModel> products = new List<ProductModel>();
 
-            products = db.GetShowAll(lenguageComboBox.Text);
+            products = db.GetShow(lenguageComboBox.Text);
 
-            lectura(products);
+            Lectura(products);
         }
 
         private void serchProductButt_Click(object sender, EventArgs e)
@@ -48,7 +49,7 @@ namespace Task1DB01
 
             if (aviabelCheckBox.Checked == true)
             {
-                lectura(products);
+                Lectura(products);
             } else if (aviabelCheckBox.Checked == false)
             {
                 foreach (ProductModel product in products)
@@ -58,31 +59,6 @@ namespace Task1DB01
             }
             
         }
-
-        //private void aviabelCheckBox_CheckedChanged(object sender, EventArgs e)
-        //{
-            //DataAcces db = new DataAcces();
-
-            //List<ProductModel> products = new List<ProductModel>();
-
-            //if (aviabelCheckBox.Checked == true)
-            //{
-            //    listBoxProducts.Items.Clear();
-
-            //    products = db.producName(lenguageComboBox.Text, enterProduct.Text, aviabelCheckBox.Checked);
-
-            //    lectura(products);
-            //}
-            //else if (aviabelCheckBox.Checked == false)
-            //{
-            //    listBoxProducts.Items.Clear();
-
-            //    products = db.producName(lenguageComboBox.Text, enterProduct.Text, aviabelCheckBox.Checked);
-
-            //    lectura(products);
-            //}
-        //}
-
 
         private void lenguageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -96,15 +72,15 @@ namespace Task1DB01
 
                 products = db.GetAviabel(lenguageComboBox.Text);
 
-                lectura(products);
+                Lectura(products);
             }
             else if (aviabelCheckBox.Checked == false)
             {
                 listBoxProducts.Items.Clear();
 
-                products = db.GetShowAll(lenguageComboBox.Text);
+                products = db.GetShow(lenguageComboBox.Text);
 
-                lectura(products);
+                Lectura(products);
             }
         }
 
@@ -124,7 +100,7 @@ namespace Task1DB01
             listBoxProducts.Items.Clear();
             products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, numFilasComboBox.Text);
 
-            lectura(products);
+            Lectura(products);
         }
 
         private void nextButt_Click(object sender, EventArgs e)
@@ -151,7 +127,7 @@ namespace Task1DB01
 
             products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg - 1, numFilasComboBox.Text);
 
-            lectura(products);
+            Lectura(products);
         }
 
         private void backButt_Click(object sender, EventArgs e)
@@ -178,7 +154,7 @@ namespace Task1DB01
 
                 products = db.UpdateViewRowsPage(lenguageComboBox.Text, currentpg, numFilasComboBox.Text);
 
-                lectura(products);
+                Lectura(products);
             }
 
 
@@ -197,6 +173,12 @@ namespace Task1DB01
             {
                 listBoxProducts.Items.Add(product.PNamFiltro);
             }
+        }
+
+        private void listBoxProducts_DoubleClick(object sender, EventArgs e)
+        {
+            ProductCompletForm pc = new ProductCompletForm(lenguageComboBox.Text, listBoxProducts.Text);
+            pc.ShowDialog();
         }
 
         public int calculpg()
@@ -221,7 +203,5 @@ namespace Task1DB01
                 return numtotalPg;
             }
         }
-
-        
     }
 }

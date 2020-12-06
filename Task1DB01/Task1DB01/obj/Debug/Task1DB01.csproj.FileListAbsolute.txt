@@ -38,7 +38,6 @@ C:\Users\Alumne\Desktop\Interficies\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\
 C:\Users\Alumne\Desktop\Interficies\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.exe
 C:\Users\Alumne\Desktop\Interficies\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.pdb
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csprojAssemblyReference.cache
-C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.Form1.resources
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.Properties.Resources.resources
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.GenerateResource.cache
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.CoreCompileInputs.cache
@@ -50,3 +49,5 @@ C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1D
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\bin\Debug\Dapper.dll
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\bin\Debug\Dapper.xml
 C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.csproj.CopyComplete
+C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.MainForm.resources
+C:\Users\xesc2\Desktop\ItnerTSK NO SE QUE PUTES PASSA\Interficies-TSK-DB1\Task1DB01\Task1DB01\obj\Debug\Task1DB01.ProductCompletForm.resources
